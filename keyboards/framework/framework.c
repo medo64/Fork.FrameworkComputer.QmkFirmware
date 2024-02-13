@@ -195,6 +195,7 @@ bool handle_bios_hotkeys(uint16_t keycode, keyrecord_t *record) {
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
   process_record_user(keycode, record);
+    static uint16_t key_timer;
 
   os_variant_t os = detected_host_os();
   set_bios_mode(true);
@@ -305,6 +306,17 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LGUI);
       }
       return false; // Skip all further processing of this key
+
+    case KC_ESC:
+        if (record->event.pressed) {
+            key_timer = timer_read();
+        } else {
+            if (timer_elapsed(key_timer) >= 5000) {
+                bootloader_jump();
+            }
+        }
+        break;
+
     default:
       return true; // Process all other keycodes normally
   }
