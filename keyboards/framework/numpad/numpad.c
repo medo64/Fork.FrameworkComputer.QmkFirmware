@@ -7,6 +7,7 @@
 void keyboard_post_init_user(void) {
     // Sync initial numlock state from the host
     layer_on(_NUMLOCK);
+    backlight_enable();
     if (host_keyboard_led_state().num_lock) {
         backlight_level_noeeprom(2);
     } else {
