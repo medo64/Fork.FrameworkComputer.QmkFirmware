@@ -41,22 +41,23 @@ bool led_update_user(led_t led_state) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    static uint16_t escape_key_timer = 0;
-    static bool escape_other_key_recorded = false;  // track if any key other than ESC has been pressed
-    if (keycode != KC_ESC) { escape_other_key_recorded = true; }
+    static uint16_t bootloader_key_timer = 0;
+    static bool bootloader_other_key_recorded = false;  // track if any key other than NumLock has been pressed
+    if (keycode != KC_NUM) { bootloader_other_key_recorded = true; }
 
     switch (keycode) {
-        case KC_ESC:
+
+        case KC_NUM:  // enter bootloader if NumLock is held for 5 seconds
             if (record->event.pressed) {
-                escape_key_timer = timer_read();
-                escape_other_key_recorded = false;  // start tracking other keys
+                bootloader_key_timer = timer_read();
+                bootloader_other_key_recorded = false;  // start tracking other keys
             } else {
-                if (!escape_other_key_recorded) {  // only go to bootloader if no other key has been pressed
-                    if (timer_elapsed(escape_key_timer) >= 5000) {
+                if (!bootloader_other_key_recorded) {  // only go to bootloader if no other key has been pressed
+                    if (timer_elapsed(bootloader_key_timer) >= 5000) {
                         bootloader_jump();
                     }
                 }
-                escape_key_timer = 0;  // reset timer counter on release so it can be used for tracking if ESC is pressed
+                bootloader_key_timer = 0;  // reset timer counter on release so it can be used for tracking if NumLock is pressed
             }
             break;
 
