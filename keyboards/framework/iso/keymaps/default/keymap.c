@@ -88,7 +88,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Make sure to keep FN Lock even after reset
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    static uint16_t bootloader_key_timer = 0;
+    static bool bootloader_other_key_recorded = false;  // track if any key other than CapsLock has been pressed
+    if (keycode != KC_CAPS) { bootloader_other_key_recorded = true; }
+
     switch (keycode) {
+        case KC_CAPS:  // enter bootloader if CapsLock is held for 5 seconds
+            if (record->event.pressed) {
+                bootloader_key_timer = timer_read();
+                bootloader_other_key_recorded = false;  // start tracking other keys
+            } else {
+                if (!bootloader_other_key_recorded) {  // only go to bootloader if no other key has been pressed
+                    if (timer_elapsed(bootloader_key_timer) >= 5000) {
+                        bootloader_jump();
+                    }
+                }
+                bootloader_key_timer = 0;  // reset timer counter on release so it can be used for tracking if CapsLock is pressed
+            }
+            break;
+
         case FN_LOCK:
             if (record->event.pressed) {
                 if (layer_state_is(_FN)) {
