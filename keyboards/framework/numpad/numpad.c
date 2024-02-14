@@ -8,8 +8,8 @@ void keyboard_post_init_user(void) {
     // Sync initial numlock state from the host
     layer_on(_NUMLOCK);
     if (host_keyboard_led_state().num_lock) {
-        backlight_set(2);
+        backlight_level_noeeprom(2);
     } else {
-        backlight_set(1);
+        backlight_level_noeeprom(1);
     }
 }
