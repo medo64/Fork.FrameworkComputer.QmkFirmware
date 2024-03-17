@@ -71,7 +71,7 @@ action_t action_for_keycode(uint16_t keycode) {
             action.code = ACTION_USAGE_CONSUMER(KEYCODE2CONSUMER(keycode));
             break;
         case KC_AIRPLANE_MODE:
-            action.code = ACTION_USAGE_RADIO;
+            action.code = ACTION_USAGE_CONSUMER(KEYCODE2CONSUMER(KC_MY_COMPUTER));
             break;
 #endif
         case KC_MS_UP ... KC_MS_ACCEL2:
