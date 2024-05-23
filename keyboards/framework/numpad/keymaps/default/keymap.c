@@ -48,10 +48,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * 21 total
      */
     [_FN] = LAYOUT(
-        KC_ESC,  KC_CALC, KC_PEQL, KC_BSPC,
-        KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS,
+        KC_ESC,  KC_CALC, KC_PSCR, KC_MUTE,
+        KC_NUM,  KC_BRID, KC_BRIU, KC_VOLD,
         KC_P7,   KC_P8,   KC_P9,
-        KC_P4,   KC_P5,   KC_P6,   KC_PPLS,
+        KC_P4,   KC_P5,   KC_P6,   KC_VOLU,
         KC_P1,   KC_P2,   KC_P3,
             KC_INS,       KC_DEL,  KC_ENT
     ),
