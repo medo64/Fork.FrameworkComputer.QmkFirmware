@@ -17,7 +17,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  3 keys │ 1  │ 2  │ 3  │    │
      *         ├────┴────┼────┤    │
      *  3 keys │ 0       │ .  │Entr│
-     *         └─────────┴────┴────┴
+     *         └─────────┴────┴────┘
      * 21 total
      */
     [_NUMLOCK] = LAYOUT(
@@ -28,23 +28,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_P1,   KC_P2,   KC_P3,
             KC_P0,        KC_PDOT, KC_ENT
     ),
+
      /*
      * Extra keys for when numlock is disabled.
      * Numlock keys are passed through to the number layer,
      * and automatically remapped by the OS.
      *         ┌────┬────┬────┬────┐
-     *  4 keys │    │    │    │    │
+     *  4 keys │Esc │Calc│MicM│Mute│
      *         ├────┼────┼────┼────┤
-     *  4 keys │    │    │    │    │
+     *  4 keys │ Num│Bck-│Bck+│Vol-│
      *         ├────┼────┼────┼────┤
-     *  3 keys │Home│ ↑  │PgUp│BL  │
-     *         ├────┼────┼────┤Brtg│
-     *  4 keys │ ←  │    │ →  │    |
+     *  3 keys │Home│ ↑  │PgUp│    │
+     *         ├────┼────┼────┤    │
+     *  4 keys │ ←  │    │ →  │Vol+|
      *         ├────┼────┼────┼────┤
-     *  3 keys │End │ ↓  │PdDn│BL  │
-     *         ├────┴────┼────┤Step│
-     *  3 keys │ Insert  │Del │    │
-     *         └─────────┴────┴────┴
+     *  3 keys │End │ ↓  │PdDn│    │
+     *         ├────┴────┼────┤    │
+     *  3 keys │ Insert  │Del │Entr│
+     *         └─────────┴────┴────┘
      * 21 total
      */
     [_FN] = LAYOUT(
